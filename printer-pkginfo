@@ -251,6 +251,13 @@ rm -f /private/etc/cups/deployment/receipts/$printerName.plist
 
     # If Category Specified write it in, otherwise set Category to 'Printers'
     pkginfo['category'] = category
+    # Write in Icon Path if set, or else leave out.
+    try:
+        icon = plist_opts.get('icon')
+    except:
+        icon = None
+    if icon != None:
+        pkginfo['icon_name'] = icon
 
     print plistlib.writePlistToString(pkginfo)
 
