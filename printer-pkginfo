@@ -54,6 +54,11 @@ def main():
         catalog = 'testing'
 
     try:
+        category = plist_opts['default_category']
+    except:
+        category = 'Printers'
+
+    try:
         protocol = plist_opts['protocol']
     except:
         protocol = 'lpd'
@@ -243,6 +248,9 @@ rm -f /private/etc/cups/deployment/receipts/$printerName.plist
     # Add Uninstallable flag
     uninstallable = True
     pkginfo['uninstallable'] = uninstallable
+
+    # If Category Specified write it in, otherwise set Category to 'Printers'
+    pkginfo['category'] = category
 
     print plistlib.writePlistToString(pkginfo)
 
